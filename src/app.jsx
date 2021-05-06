@@ -1,8 +1,8 @@
-import React from 'react';
-import './app.css';
+import './app.module.css';
+import Login from './components/login/login';
 
-function App() {
-  return <h1>Hello World!</h1>;
+function App({ authService }) {
+  return <Login authService={authService} />;
 }
 
 export default App;
