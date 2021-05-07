@@ -1,5 +1,5 @@
 import styles from './maker.module.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Header from '../header/header';
 import Editor from '../editor/editor';
 import Preview from '../preview/preview';
@@ -9,7 +9,7 @@ import { useHistory } from 'react-router';
 const Maker = ({ authService }) => {
   const [cards, setCards] = useState([
     {
-      key: 1,
+      id: 1,
       name: 'Nabepa',
       company: 'Apple',
       theme: 'dark',
@@ -20,7 +20,7 @@ const Maker = ({ authService }) => {
       fileURL: null,
     },
     {
-      key: 2,
+      id: 2,
       name: 'Nabepa',
       company: 'Google',
       theme: 'light',
@@ -31,7 +31,7 @@ const Maker = ({ authService }) => {
       fileURL: null,
     },
     {
-      key: 3,
+      id: 3,
       name: 'Nabepa',
       company: 'LINE',
       theme: 'colorful',
@@ -54,11 +54,15 @@ const Maker = ({ authService }) => {
       }
     });
   });
+
+  const addCard = useCallback((card) => {
+    setCards([...cards, card]);
+  });
   return (
     <section className={styles.maker}>
       <Header onLogout={onLogout} />
       <div className={styles.container}>
-        <Editor cards={cards} />
+        <Editor cards={cards} onAdd={addCard} />
         <Preview cards={cards} />
       </div>
       <Footer />
