@@ -1,14 +1,30 @@
 import styles from './login.module.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import { useHistory } from 'react-router';
 
 const Login = ({ authService }) => {
+  const history = useHistory();
+  const goToMaker = (userId) => {
+    history.push({
+      pathname: '/maker',
+      state: { id: userId }, // Route의 location에 원하는 정보 저장
+    });
+  };
+
   const onLogin = (event) => {
     authService //
       .login(event.currentTarget.textContent)
-      .then(console.log);
+      .then((data) => goToMaker(data.user.uid));
   };
+
+  useEffect(() => {
+    authService //
+      .onAuthChange((user) => {
+        user && goToMaker(user.uid);
+      });
+  });
   return (
     <section className={styles.login}>
       <Header />
