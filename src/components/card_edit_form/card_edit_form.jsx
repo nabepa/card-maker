@@ -3,24 +3,7 @@ import React, { useRef } from 'react';
 import Button from '../button/button';
 
 const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
-  const formRef = useRef();
-  const nameRef = useRef();
-  const companyRef = useRef();
-  const themeRef = useRef();
-  const titleRef = useRef();
-  const emailRef = useRef();
-  const messageRef = useRef();
-
-  const {
-    name,
-    company,
-    title,
-    email,
-    message,
-    theme,
-    fileName,
-    fileURL,
-  } = card;
+  const { name, company, title, email, message, theme, fileName } = card;
 
   const onFileChange = (file) => {
     updateCard({
