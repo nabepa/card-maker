@@ -1,5 +1,5 @@
 import styles from './maker.module.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Header from '../header/header';
 import Editor from '../editor/editor';
 import Preview from '../preview/preview';
@@ -32,9 +32,9 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
     });
   }, [userId, authService, history]);
 
-  const onLogout = () => {
+  const onLogout = useCallback(() => {
     authService.logout();
-  };
+  }, [authService]);
 
   const createOrUpdateCard = (card) => {
     setCards((cards) => {
