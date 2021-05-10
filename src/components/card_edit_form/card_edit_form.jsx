@@ -28,6 +28,8 @@ const CardEditForm = memo(({ FileInput, card, updateCard, deleteCard }) => {
     deleteCard(card);
   };
 
+  console.log('edit');
+
   return (
     <form className={styles.form}>
       <input

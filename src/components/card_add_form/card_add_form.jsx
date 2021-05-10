@@ -37,6 +37,7 @@ const CardAddForm = memo(({ FileInput, addCard }) => {
     setFile({ fileName: null, fileURL: null });
     addCard(card);
   };
+  console.log('add');
 
   return (
     <form ref={formRef} className={styles.form}>

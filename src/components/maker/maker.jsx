@@ -36,25 +36,31 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
     authService.logout();
   }, [authService]);
 
-  const createOrUpdateCard = (card) => {
-    setCards((cards) => {
-      const updated = { ...cards };
-      updated[card.id] = card;
-      return updated;
-    });
+  const createOrUpdateCard = useCallback(
+    (card) => {
+      setCards((cards) => {
+        const updated = { ...cards };
+        updated[card.id] = card;
+        return updated;
+      });
 
-    cardRepository.saveCard(userId, card);
-  };
+      cardRepository.saveCard(userId, card);
+    },
+    [cardRepository, userId]
+  );
 
-  const deleteCard = (card) => {
-    setCards((cards) => {
-      const updated = { ...cards };
-      delete updated[card.id];
-      return updated;
-    });
+  const deleteCard = useCallback(
+    (card) => {
+      setCards((cards) => {
+        const updated = { ...cards };
+        delete updated[card.id];
+        return updated;
+      });
 
-    cardRepository.removeCard(userId, card);
-  };
+      cardRepository.removeCard(userId, card);
+    },
+    [cardRepository, userId]
+  );
 
   return (
     <section className={styles.maker}>
